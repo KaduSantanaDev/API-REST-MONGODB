@@ -5,19 +5,20 @@ const mongoose = require('mongoose');
 const routes = require('./src/routes');
 
 const app = express();
-mongoose.connect(process.env.CONNENCTIONSTRING, {
+
+mongoose.connect('mongodb+srv://kadusantana:k17l07t14@School.hvoiy.mongodb.net/schoolretryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => {
-  console.log('conectei');
-  app.emit('event');
 });
-app.use(express.urlencoded({ extended: true }));
 
+const db = mongoose.connection;
+db.on('error', (error) => console.log(error));
+db.once('open', () => console.log('conectado'));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(routes);
 
-app.on('event', () => {
-  app.listen(3003, () => {
-    console.log('http://localhost:3003');
-  });
+app.listen(3003, () => {
+  console.log('http://localhost:3003');
 });
