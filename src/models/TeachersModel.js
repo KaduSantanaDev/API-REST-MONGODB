@@ -4,7 +4,6 @@ const validateEmail = (email) => {
   const validation = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return validation.test(email);
 };
-
 const TeacherSchema = new mongoose.Schema({
   name: {
     type: String,

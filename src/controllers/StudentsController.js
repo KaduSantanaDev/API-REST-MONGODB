@@ -62,7 +62,9 @@ module.exports = {
       const student = await Student.findByIdAndDelete({ _id: id });
       return res.json(student);
     } catch (error) {
-      return res.status(400).json();
+      return res.status(400).json({
+        errors: 'internal server error',
+      });
     }
   },
 };
