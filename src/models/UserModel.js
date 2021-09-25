@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const validateEmail = (email) => {
   const validation = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -22,6 +21,3 @@ const UserSchema = new mongoose.Schema({
 const userModel = mongoose.model('User', UserSchema, 'users');
 
 module.exports = userModel;
-exports.passwordValid = function passwordIsValid(password) {
-  return bcrypt.compare(password, UserSchema.password);
-};
